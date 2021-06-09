@@ -3,12 +3,16 @@ import 'package:beamer_guards/auth_repository.dart';
 import 'package:beamer_guards/main.dart';
 
 abstract class AppRouter {
+  static final homeRoute = '/home';
+  static final loadingRoute = '/loading';
+  static final signInRoute = '/signIn';
+
   static final routerDelegate = BeamerDelegate(
     guards: [
       BeamGuard(
         pathBlueprints: ['/'],
         check: (ctx, state) => false,
-        beamToNamed: '/home',
+        beamToNamed: homeRoute,
       ),
       // when starting the application, we check if the authenticated user is
       // already set. If not we go to the loading page.
@@ -19,17 +23,17 @@ abstract class AppRouter {
       // unauthenticate the user and that should be reflected in the UI.
       BeamGuard(
         guardNonMatching: true,
-        pathBlueprints: ['/loading'],
+        pathBlueprints: [loadingRoute],
         check: (ctx, state) =>
             AuthRepository.instance.authUser$.value is! UnknownAuthUser,
-        beamToNamed: '/loading',
+        beamToNamed: loadingRoute,
       )
     ],
     locationBuilder: SimpleLocationBuilder(
       routes: {
-        '/loading': (context, state) => LoadingPage(),
-        '/home': (context, state) => HomePage(),
-        '/login': (context, state) => LoginPage(),
+        loadingRoute: (context, state) => LoadingPage(),
+        homeRoute: (context, state) => HomePage(),
+        signInRoute: (context, state) => LoginPage(),
       },
     ),
   );
