@@ -10,6 +10,13 @@ abstract class AppRouter {
         check: (ctx, state) => false,
         beamToNamed: '/home',
       ),
+      // when starting the application, we check if the authenticated user is
+      // already set. If not we go to the loading page.
+      // however we need to redirect when the user is finally authenticated
+      // or unauthenticated. We could redirect the user when he logs in / out
+      // but that doesn't account for things happening on the server side.
+      // For example there could be a property on firebase that when changed should
+      // unauthenticate the user and that should be reflected in the UI.
       BeamGuard(
         guardNonMatching: true,
         pathBlueprints: ['/loading'],
