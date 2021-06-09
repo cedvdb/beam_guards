@@ -4,7 +4,7 @@ import 'package:rxdart/subjects.dart';
 
 class AuthUser {}
 
-class LoadingAuthUser extends AuthUser {}
+class UnknownAuthUser extends AuthUser {}
 
 class UnauthenticatedUser extends AuthUser {}
 
@@ -14,7 +14,7 @@ class AuthRepository {
   static final instance = AuthRepository._();
 
   BehaviorSubject<AuthUser> authUser$ =
-      BehaviorSubject.seeded(LoadingAuthUser());
+      BehaviorSubject.seeded(UnknownAuthUser());
 
   AuthRepository._() {
     Future.delayed(Duration(seconds: 5))

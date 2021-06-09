@@ -21,7 +21,7 @@ abstract class AppRouter {
         guardNonMatching: true,
         pathBlueprints: ['/loading'],
         check: (ctx, state) =>
-            AuthRepository.instance.authUser$.value is! LoadingAuthUser,
+            AuthRepository.instance.authUser$.value is! UnknownAuthUser,
         beamToNamed: '/loading',
       )
     ],
