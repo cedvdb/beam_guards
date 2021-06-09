@@ -18,6 +18,8 @@ class ReactiveGuard extends StatelessWidget {
           print(snap.data);
           AuthUser authUser = snap.data!;
 
+          // in more complicated systems there is often more than one stream being listened onto and it sort of cascades here.
+
           if (authUser is UnknownAuthUser) {
             Beamer.of(context).beamToNamed(AppRouter.loadingRoute);
           }
