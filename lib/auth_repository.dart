@@ -17,7 +17,7 @@ class AuthRepository {
       BehaviorSubject.seeded(UnknownAuthUser());
 
   AuthRepository._() {
-    Future.delayed(Duration(seconds: 5))
+    Future.delayed(Duration(seconds: 2))
         .then((_) => authUser$.add(UnauthenticatedUser()));
   }
 }
